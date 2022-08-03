@@ -56,7 +56,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'arrivedo.urls'
+ROOT_URLCONF = 'location_advisor.urls'
 
 TEMPLATES = [
     {
@@ -74,7 +74,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'arrivedo.wsgi.application'
+WSGI_APPLICATION = 'location_advisor.wsgi.application'
 
 
 # Database
