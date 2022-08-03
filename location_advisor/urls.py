@@ -19,5 +19,5 @@ from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('client_foursquare.urls', namespace='services')),
+    path('api/', include('recommendations.urls', namespace='services')),
 ]

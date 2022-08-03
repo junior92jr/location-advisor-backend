@@ -1,9 +1,9 @@
 from django.urls import include, path
 
 
-from client_foursquare import views
+from recommendations import views
 
-app_name = "client_foursquare"
+app_name = "recommendations"
 
 urlpatterns = [
     path('recomendations/',

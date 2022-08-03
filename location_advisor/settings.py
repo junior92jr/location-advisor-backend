@@ -25,13 +25,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '0fyvcc!njq)^x$s4k4%-$vgfnlk&#lom1a2&^%@_jcp4l2&m)o'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool('DEBUG')
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
 
 # Application definition
 
@@ -43,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'client_foursquare',
+    'recommendations',
 ]
 
 MIDDLEWARE = [
@@ -125,6 +124,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+# Foursquare Credentials
 
 FOURSQUARE_CLIENT_ID = env('FOURSQUARE_CLIENT_ID')
 FOURSQUARE_CLIENT_SECRET = env('FOURSQUARE_CLIENT_SECRET')
