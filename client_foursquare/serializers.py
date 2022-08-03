@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from rest_framework import serializers
 
 from .constants import VALID_CATEGORY_CHOICES, CATEGORY_INVALID_MESSAGE
@@ -21,7 +20,7 @@ class RecomendatiosQuerySerializer(serializers.Serializer):
 
         :return: Return the current value if the validations is success
         """
-
+        
         if not value in VALID_CATEGORY_CHOICES:
             raise serializers.ValidationError(CATEGORY_INVALID_MESSAGE)
 

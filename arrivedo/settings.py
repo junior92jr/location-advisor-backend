@@ -11,6 +11,11 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import environ
+
+
+env = environ.Env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -121,6 +126,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-FOURSQUARE_CLIENT_ID = 'FOKB5YY3LROSTYUQRKR0TDHL4E2UYYT0LUDPUXGWO0LS0QLO'
-
-FOURSQUARE_CLIENT_SECRET = 'KDX4VQS0SP2G53G1MOVB1JCFBHSGD21EXPVPAX2SU4SFRPU5'
+FOURSQUARE_CLIENT_ID = env('FOURSQUARE_CLIENT_ID')
+FOURSQUARE_CLIENT_SECRET = env('FOURSQUARE_CLIENT_SECRET')

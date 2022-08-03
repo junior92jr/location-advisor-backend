@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
@@ -28,6 +26,7 @@ class RecomendationViewSet(viewsets.ViewSet):
         """
 
         serializer = self.serializer_class(data=request.query_params)
+        
         serializer.is_valid(raise_exception=True)
 
         client = ClientFourSquare()
