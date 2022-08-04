@@ -1,35 +1,53 @@
+
 from rest_framework import viewsets
+
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
+from rest_framework.decorators import action
+
 
 from .serializers import RecomendatiosQuerySerializer
-from .client import ClientFourSquare
-from .utils import build_top_ten_parameters
+from .resources import FourSquareResource
 
 
-class RecomendationViewSet(viewsets.ViewSet):
+class RecomendationViewSet(viewsets.GenericViewSet):
     """
     ViewSet that handle the connection the Foursquare API
     """
 
     serializer_class = RecomendatiosQuerySerializer
     permission_classes = (AllowAny,)
-    queryset = None
+    queryset = []
 
-    def list(self, request):
+    @action(methods=['get'], url_path=r'recommendations', detail=False)
+    def recommendations(self, request):
         """
-        Generate the connection to the external API
-
-        :param request: request comming from the session
-
-        :return: Void function that generate a session
+        Get method to retrieve all recommendations near a location.
         """
 
         serializer = self.serializer_class(data=request.query_params)
         
         serializer.is_valid(raise_exception=True)
 
-        client = ClientFourSquare()
-        client.get_client()
+        response = FourSquareResource.search_places_by_location(serializer.data)
+        category = serializer.data.get('category')
+        
+        if category:
+            response = FourSquareResource.filter_by_category(response, category)
 
-        return Response({"results": client.get_top_ten(serializer.data)})
+        return Response(response)
+
+    @action(methods=['get'], url_path=r'categories', detail=False)
+    def categories(self, request):
+        """
+        Get method to retrieve all non repeated categories from requested recommendations.
+        """
+
+        serializer = self.serializer_class(data=request.query_params)
+        
+        serializer.is_valid(raise_exception=True)
+
+        categories = FourSquareResource.get_categories(
+            FourSquareResource.search_places_by_location(serializer.data))
+
+        return Response(categories)

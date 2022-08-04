@@ -1,11 +1,14 @@
-from django.urls import include, path
+from rest_framework.routers import DefaultRouter
 
+from .views import RecomendationViewSet
 
-from recommendations import views
 
 app_name = "recommendations"
 
-urlpatterns = [
-    path('recomendations/',
-        views.RecomendationViewSet.as_view({'get': 'list'})),
-]
+router = DefaultRouter()
+
+router.register('', RecomendationViewSet, basename='recomendations_app_url')
+
+urlpatterns = []
+
+urlpatterns += router.urls

@@ -86,6 +86,15 @@ DATABASES = {
     }
 }
 
+# Cache
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': '/var/tmp/foursquare_response',
+    }
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
@@ -128,5 +137,4 @@ STATIC_URL = '/static/'
 
 # Foursquare Credentials
 
-FOURSQUARE_CLIENT_ID = env('FOURSQUARE_CLIENT_ID')
-FOURSQUARE_CLIENT_SECRET = env('FOURSQUARE_CLIENT_SECRET')
+FOURSQUARE_API_KEY = env('FOURSQUARE_API_KEY')
