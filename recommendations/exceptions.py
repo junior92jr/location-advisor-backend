@@ -1,5 +1,6 @@
 from rest_framework.exceptions import APIException
 
+
 class FourSquareResourceUnavailable(APIException):
     """
     Custom Exception when Foursquare service returns a different status than 200.
