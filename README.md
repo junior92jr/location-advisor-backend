@@ -1,5 +1,15 @@
 # Location Advisor Backend
 
+This backend project is a Rest Api that provides touristic information for a Frontend project.
+Main source of the information comes from Foursquare:
+
+* https://foursquare.com/
+
+It provides recommendations for touristic destinations based on your current location.
+
+This API should provide dynamic information that will be displayed in a frontend project.
+
+
 ## Configure the project
 ### Create a virtualenv
 
