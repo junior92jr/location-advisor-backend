@@ -9,6 +9,54 @@ It provides recommendations for touristic destinations based on your current loc
 
 This API should provide dynamic information that will be displayed in a frontend project.
 
+## Usage
+
+This project stills on development but already provides functional endpoints ready to use:
+
+### How to Authenticate
+Auth endpoint:
+```
+(POST) /api/v1/api-token-auth/
+```
+Body Request:
+```
+{
+  "username": "user",
+  "password": "user_pass"
+}
+```
+Response:
+```
+{
+    "token": "fbfd14c374618e78bc9bbe1f6a576489a94f61f7"
+}
+```
+
+### How to use the location service
+
+Get all recomendations from your current location:
+```
+(GET) /api/v1/recommendations/?lat=50.1101038&lng=8.6771587
+```
+
+Get all the categories available categories from current results, Foursquate offers same functionality but every time we use the endpoint it consumes our montly budget. So are handling the functionality in our side.
+
+```
+(GET) /api/v1/categories/?lat=50.1101038&lng=8.6771586
+```
+
+Get all recommendations on a radius range in meters:
+```
+(GET) /api/v1/recommendations/?lat=50.1101038&lng=8.6771587&search_radious=62
+```
+
+Get all recommendations filterd by category:
+```
+(GET) /api/v1/recommendations/?lat=50.1101038&lng=8.6771587&category=12334
+```
+
+where "12334" is the ID in Foursquare for a category.
+
 
 ## Configure the project
 ### Create a virtualenv
