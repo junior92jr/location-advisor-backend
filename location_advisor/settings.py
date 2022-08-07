@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'recommendations',
 ]
 
@@ -138,3 +139,11 @@ STATIC_URL = '/static/'
 # Foursquare Credentials
 
 FOURSQUARE_API_KEY = env('FOURSQUARE_API_KEY')
+
+# Restframework
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}

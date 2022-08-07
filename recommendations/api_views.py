@@ -2,7 +2,7 @@
 from rest_framework import viewsets
 
 from rest_framework.response import Response
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import action
 
 from .serializers import RecomendatiosQuerySerializer
@@ -15,7 +15,7 @@ class RecomendationViewSet(viewsets.GenericViewSet):
     """
 
     serializer_class = RecomendatiosQuerySerializer
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAuthenticated,)
     queryset = []
 
     @action(methods=['get'], url_path=r'recommendations', detail=False)
@@ -30,9 +30,13 @@ class RecomendationViewSet(viewsets.GenericViewSet):
 
         response = FourSquareResource.search_places_by_location(serializer.data)
         category = serializer.data.get('category')
+        search_radious = serializer.data.get('search_radious')
         
         if category:
             response = FourSquareResource.filter_by_category(response, category)
+        
+        if search_radious:
+            response = FourSquareResource.range_query(response, search_radious)
 
         return Response(response)
 
