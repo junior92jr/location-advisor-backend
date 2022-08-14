@@ -1,4 +1,6 @@
 
-SEARCH_PLACES_ENDPOINT_URL = "https://api.foursquare.com/v3/places/search"
+FOURSQUARE_API_PROTOCOL = 'https'
+FOURSQUARE_API_DOMAIN = 'api.foursquare.com'
+FOURSQUARE_API_VERSION = 'v3'
 
 CACHE_TIMEOUT_IN_SECS = 86400

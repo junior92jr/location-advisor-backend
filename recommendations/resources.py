@@ -3,15 +3,25 @@ import requests
 from django.conf import settings
 
 from .decorators import store_response_in_cache
-from .constants import SEARCH_PLACES_ENDPOINT_URL
 from .exceptions import FourSquareResourceUnavailable
 from .mixins import FourSquareUtilsMixin
+from .constants import (
+    FOURSQUARE_API_PROTOCOL,
+    FOURSQUARE_API_DOMAIN,
+    FOURSQUARE_API_VERSION,
+)
 
 
 class FourSquareResource(FourSquareUtilsMixin):
     """
     FourSquare Resource class with functions to get data from external api.
     """
+
+    api_url = '{protocol}://{domain}/{version}'.format(
+        protocol=FOURSQUARE_API_PROTOCOL,
+        domain=FOURSQUARE_API_DOMAIN,
+        version=FOURSQUARE_API_VERSION
+    )
 
     @classmethod
     @store_response_in_cache
@@ -26,14 +36,22 @@ class FourSquareResource(FourSquareUtilsMixin):
 
         headers = {
             "Accept": "application/json",
-            "Authorization": settings.FOURSQUARE_API_KEY}
+            "Authorization": settings.FOURSQUARE_API_KEY
+        }
         
         payload = {
             'll': '{lat},{lng}'.format(
-                lat=query_params['lat'], lng=query_params['lng'])}
+                lat=query_params['lat'], 
+                lng=query_params['lng']
+            )
+        }
 
         response = requests.get(
-            SEARCH_PLACES_ENDPOINT_URL, headers=headers, params=payload)
+            '{api_url}/{endpoint}'.format(
+                api_url=cls.api_url, 
+                endpoint='places/search'), 
+            headers=headers, params=payload
+        )
         
         return response
     
